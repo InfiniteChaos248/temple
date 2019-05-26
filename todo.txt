@@ -3,12 +3,15 @@ code cleanup, documentation
 report generation
 
 DEV ISSUES/OPTIMIZATION:
-#
+patient number reload issue
 
 DEV QUEUE:
 UI styling
 medicine details -> description
-patient details -> extra details, signature
+patient details -> [gender(m/f/other), address, contact no, diagnosis]
+total in, total out
+per day => opening stock, closing stock
+for each medicine one page (Medicine report page => remove medicine log, make it medicine report)
 ***language toggle
 
 ADDITIONAL ENHANCEMENTS:
@@ -21,6 +24,5 @@ if entered data by mistake, how to delete log and re-update stock ?
 
 COMPLETED:
 all essential functionalities
-patient number reload issue
 search - today optimization => check date before doing service call
 get data optimization => merge basic endpoints

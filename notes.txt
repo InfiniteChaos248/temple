@@ -11,7 +11,7 @@ npm start (development server)
 
 
 
-True => added to stock
-False => removed from stock
-
+True => added to stock (Received)
+False => removed from stock (Issued)
+stock => (balance)
 pid = -1 => added by doctor

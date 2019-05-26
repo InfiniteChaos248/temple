@@ -45,7 +45,7 @@ class App extends Component {
     super();
     this.state = {
       showTabs: true,
-      tabValue: -1,
+      tabValue: 0,
       allMedicine: [],
       patientList: [],
       allCategories: {},

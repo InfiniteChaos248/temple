@@ -131,7 +131,7 @@ class NewLog extends Component {
                                 {
                                     this.state.medList.map((m, i) => {
                                         return (
-                                            <li key={i}>{m.name} - {m.qty} {m.unit}</li>
+                                            <li key={i}>{m.name} - {m.qty} {this.props.cats[m.category]}</li>
                                         );
                                     })
                                 }
