@@ -1,0 +1,17 @@
+MONGODB SERVER:
+"E:\mongoDB\bin\mongod.exe" --dbpath="E:\projects\temple\data"
+MONGODB CLIENT:
+"E:\mongoDB\bin\mongo.exe"
+
+PYTHON SERVER:
+python endpoint.py
+
+NODE SERVER:
+npm start (development server)
+
+
+
+True => added to stock
+False => removed from stock
+
+pid = -1 => added by doctor

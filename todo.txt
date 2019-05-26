@@ -1,0 +1,26 @@
+DEV INPROGRESS:
+code cleanup, documentation
+report generation
+
+DEV ISSUES/OPTIMIZATION:
+#
+
+DEV QUEUE:
+UI styling
+medicine details -> description
+patient details -> extra details, signature
+***language toggle
+
+ADDITIONAL ENHANCEMENTS:
+add category
+
+DEV NOTES: 
+remove, edit/modify medicine needed ?
+if entered data by mistake, how to delete log and re-update stock ?
++1 patient number stored, check if real issue or not
+
+COMPLETED:
+all essential functionalities
+patient number reload issue
+search - today optimization => check date before doing service call
+get data optimization => merge basic endpoints
