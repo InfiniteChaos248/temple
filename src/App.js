@@ -10,10 +10,12 @@ import ViewMedicineLog from './pages/ViewMedicineLog';
 import NewLog from './pages/NewLog';
 import PatientLog from './pages/PatientLog';
 import UpdateStock from './pages/UpdateStock';
+import MedicineReport from './pages/MedicineReport';
 
 class App extends Component {
 
   getData = async (tab) => {
+    this.state.tabValue = -1;
     let response = await axios.get('http://127.0.0.1:5000/getData');
     let medicines = response.data.medicines;
     let categories = response.data.categories;
@@ -45,7 +47,7 @@ class App extends Component {
     super();
     this.state = {
       showTabs: true,
-      tabValue: 0,
+      tabValue: -1,
       allMedicine: [],
       patientList: [],
       allCategories: {},
@@ -67,6 +69,7 @@ class App extends Component {
               <div style={{ cursor: "pointer" }} onClick={() => { this.setState({ tabValue: 2 }) }}>Medicine Log</div>
               <div style={{ cursor: "pointer" }} onClick={() => { this.setState({ tabValue: 3 }) }}>Patient Log</div>
               <div style={{ cursor: "pointer" }} onClick={() => { this.setState({ tabValue: 4 }) }}>Update Stock</div>
+              <div style={{ cursor: "pointer" }} onClick={() => { this.setState({ tabValue: 5 }) }}>Medicine Report</div>
             </div>
           ) : (
               <div style={{ float: "left" }}>
@@ -89,6 +92,9 @@ class App extends Component {
           }
           {
             this.state.tabValue === 4 ? <UpdateStock meds={this.state.allMedicine} cats={this.state.allCategories} refreshData={this.getData} /> : ""
+          }
+          {
+            this.state.tabValue === 5 ? <MedicineReport meds={this.state.allMedicine} medicineNames={this.state.medicineNames} medicineCategories={this.state.medicineCategories} cats={this.state.allCategories} /> : ""
           }
         </div>
       </div>

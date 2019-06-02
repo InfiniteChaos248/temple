@@ -4,7 +4,11 @@ import { withStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import axios from 'axios';
 import moment from 'moment';
-
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 import MedicineAddView from './MedicineAddView';
 
 const styles = theme => ({
@@ -24,18 +28,24 @@ class NewLog extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            num: this.props.ptno+1,
+            num: this.props.ptno + 1,
             name: "",
             age: "",
+            address: "",
+            contact: "",
+            diagnosis: "",
             show: false,
             medList: []
         }
     }
 
     submit = async () => {
-        if (this.state.name === "" || this.state.age === "" || this.state.medList.length === 0) {
+        if (this.state.name === "" || this.state.age === "" || this.state.medList.length === 0 || this.state.address === "" || this.state.diagnosis === "" || this.state.contact === "") {
             alert('Please enter patient details and add medicine')
-        } else {
+        } else if (!(this.state.contact.length === 10 || this.state.contact.length === 8)) {
+            alert('Invalid contact number')
+        }
+        else {
             let response = await axios.post('http://127.0.0.1:5000/newPatientLog', this.state)
             console.log(response.data)
             alert(response.data.message)
@@ -46,11 +56,12 @@ class NewLog extends Component {
 
     reset = () => {
         this.setState({
-            num: this.props.ptno+1,
+            num: this.props.ptno + 1,
             name: "",
             age: "",
             show: false,
-            medList: []
+            medList: [],
+            gender: ""
         })
     }
 
@@ -78,11 +89,15 @@ class NewLog extends Component {
         this.setState({ name: event.target.value })
     }
 
-    handleChange = name => value => {
+    handleChange = name => event => {
         this.setState({
-            [name]: value,
+            [name]: event.target.value,
         });
     };
+
+    handleRadioChange = event => {
+        this.setState({ gender: event.target.value })
+    }
 
     toggleAdd = () => {
         this.setState((state, props) => {
@@ -126,6 +141,59 @@ class NewLog extends Component {
                             }}
                             margin="normal"
                         />
+
+                        <FormControl component="fieldset">
+                            <FormLabel component="legend">Gender</FormLabel>
+                            <RadioGroup aria-label="gender" name="gender" value={this.state.gender} onChange={this.handleRadioChange} row>
+                                <FormControlLabel
+                                    value="M"
+                                    control={<Radio color="primary" />}
+                                    label="Male"
+                                    labelPlacement="end"
+                                />
+                                <FormControlLabel
+                                    value="F"
+                                    control={<Radio color="primary" />}
+                                    label="Female"
+                                    labelPlacement="end"
+                                />
+                                <FormControlLabel
+                                    value="O"
+                                    control={<Radio color="primary" />}
+                                    label="Other"
+                                    labelPlacement="end"
+                                />
+                            </RadioGroup>
+                        </FormControl>
+
+                        <TextField
+                            id="address"
+                            label="Address"
+                            multiline
+                            rowsMax="4"
+                            value={this.state.address}
+                            onChange={this.handleChange('address')}
+                            margin="normal"
+                        />
+
+                        <TextField
+                            id="contact"
+                            label="Contact#"
+                            value={this.state.contact}
+                            onChange={this.handleChange('contact')}
+                            margin="normal"
+                        />
+
+                        <TextField
+                            id="diagnosis"
+                            label="Diagnosis"
+                            multiline
+                            rowsMax="4"
+                            value={this.state.diagnosis}
+                            onChange={this.handleChange('diagnosis')}
+                            margin="normal"
+                        />
+
                         <div>
                             <ul>
                                 {

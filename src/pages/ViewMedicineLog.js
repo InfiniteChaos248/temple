@@ -31,6 +31,10 @@ class ViewMedicineLog extends Component {
     this.setState({ mid: mid, todayClicked: false, searchClicked: false })
   }
 
+  handleMidChange = (event) => {
+    this.setState({mid: event.target.value, todayClicked: false, searchClicked: false});
+  }
+
   getLog = async () => {
     if (this.state.mid === "") {
       alert("Please select a medicine to view it's log")
@@ -79,6 +83,18 @@ class ViewMedicineLog extends Component {
         <MedicineSelect meds={this.props.meds} cats={this.props.cats} setMid={this.selectMid} mid={this.state.mid} />
 
         <TextField
+          id="mid"
+          label="Medicine ID"
+          type="number"
+          style={{ width: "10%" }}
+          value={this.state.mid}
+          onChange={this.handleMidChange}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+
+        <TextField
           id="date"
           label="Date"
           type="date"
@@ -100,6 +116,7 @@ class ViewMedicineLog extends Component {
                 <TableRow>
                   <TableCell>Date</TableCell>
                   <TableCell>Medicine Id</TableCell>
+                  <TableCell>Patient#</TableCell>
                   <TableCell>Medicine Name</TableCell>
                   <TableCell>Quantity</TableCell>
                   <TableCell>in/out</TableCell>
@@ -112,6 +129,7 @@ class ViewMedicineLog extends Component {
                       <TableRow key={i}>
                         <TableCell>{log.date}</TableCell>
                         <TableCell>{log.mid}</TableCell>
+                        <TableCell>{log.pid === -1 ? "Doctor" : log.pid}</TableCell>
                         <TableCell>{this.props.medicineNames[log.mid]}</TableCell>
                         <TableCell>{log.qty} {this.props.cats[this.props.medicineCategories[log.mid]]}</TableCell>
                         <TableCell>{log.io ? "In" : "Out"}</TableCell>

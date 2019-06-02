@@ -66,7 +66,11 @@ class PatientLog extends Component {
                   <TableCell>Patient#</TableCell>
                   <TableCell>Name</TableCell>
                   <TableCell>Age</TableCell>
-                  <TableCell>Medicine</TableCell>
+                  <TableCell>Gender</TableCell>
+                  <TableCell>Address</TableCell>
+                  <TableCell>Contact#</TableCell>
+                  <TableCell>Diagnosis</TableCell>
+                  <TableCell>Medicine Given</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -78,6 +82,10 @@ class PatientLog extends Component {
                         <TableCell>{p.id}</TableCell>
                         <TableCell>{p.name}</TableCell>
                         <TableCell>{p.age}</TableCell>
+                        <TableCell>{p.gender !== null ? (p.gender === "M" ? "Male" : p.gender === "F" ? "Female" : "Other") : ""}</TableCell>
+                        <TableCell>{p.address !== null ? p.address : ""}</TableCell>
+                        <TableCell>{p.contact !== null ? p.contact : ""}</TableCell>
+                        <TableCell>{p.diagnosis !== null ? p.diagnosis : ""}</TableCell>
                         <TableCell>{
                           <ul>
                             {

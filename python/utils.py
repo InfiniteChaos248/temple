@@ -33,6 +33,10 @@ def make_patient_dict(doc):
     patient["name"]=doc["name"]
     patient["age"]=doc["age"]
     patient["medList"] = doc["medicines"]
+    patient["address"] = doc.get("address")
+    patient["contact"] = doc.get("contact")
+    patient["diagnosis"] = doc.get("diagnosis")
+    patient["gender"] = doc.get("gender")
     return patient
 
 def make_medicine_log_dict(doc):

@@ -44,5 +44,17 @@ def add_new_madicine():
 def new_patient_log():
 	return jsonify(da.new_patient_log(request.json))
 
+@app.route('/fetchMedicineReport',methods = ['POST'])
+def fetch_medicine_report():
+	return jsonify(da.fetch_medicine_report(request.json["mid"]))
+
+@app.route('/admin/triggerJob1',methods = ['POST'])
+def trigger_job_1():
+	access_code = request.json["access_code"]
+	if access_code == "arjun":
+		if da.generate_daily_starting_stock():
+			return "Job completed"
+	return "Invalid access code"
+
 if __name__ == '__main__':
    app.run()

@@ -1,28 +1,36 @@
 DEV INPROGRESS:
 code cleanup, documentation
-report generation
 
 DEV ISSUES/OPTIMIZATION:
-patient number reload issue
+#
 
 DEV QUEUE:
 UI styling
-medicine details -> description
-patient details -> [gender(m/f/other), address, contact no, diagnosis]
-total in, total out
-per day => opening stock, closing stock
-for each medicine one page (Medicine report page => remove medicine log, make it medicine report)
+medicine report generation -> PDF
 ***language toggle
+client(react)-server(flask) enccryption and decryption
+production build and deployment
+make code pytonic
 
 ADDITIONAL ENHANCEMENTS:
 add category
 
 DEV NOTES: 
+medicine details -> description needed ?
 remove, edit/modify medicine needed ?
-if entered data by mistake, how to delete log and re-update stock ?
+if entered data by mistake, how to delete log and re-update stock ? Lots of documents need to modified
+What if data is entered on a later day -> async/late logging
 +1 patient number stored, check if real issue or not
+medicine report => 
+    total in, total out
+    per day => opening stock, closing stock
+    for each medicine one page (Medicine report page => remove medicine log, make it medicine report)
 
 COMPLETED:
 all essential functionalities
 search - today optimization => check date before doing service call
 get data optimization => merge basic endpoints
+background server process and admin endpoint generating daily starting stock for report
+patient number reload issue
+patient details -> [gender(m/f/other), address, contact no, diagnosis]
+medicine report generation

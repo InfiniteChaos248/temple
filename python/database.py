@@ -3,27 +3,21 @@ from pymongo import MongoClient
 db_url = 'localhost'
 port = 27017
 db_name = 'temple_test'
+# made new connection in individual getc method -> nit necessary so corrected now
+client = MongoClient(db_url, port)
+db = client[db_name]
 
 def getc_medicine():
-    client = MongoClient(db_url, port)
-    db = client[db_name]
-    medicine_collection = db.medicine
-    return medicine_collection
+    return db.medicine
 
-def getc_category():
-    client = MongoClient(db_url, port)
-    db = client[db_name]
-    category_collection = db.static
-    return category_collection
+def getc_category(): 
+    return db.static
 
 def getc_patient():
-    client = MongoClient(db_url, port)
-    db = client[db_name]
-    patient_collection = db.patient
-    return patient_collection
+    return db.patient
 
 def getc_log():
-    client = MongoClient(db_url, port)
-    db = client[db_name]
-    log_collection = db.log
-    return log_collection
+    return db.log
+
+def getc_daily_starting_stock():
+    return db["daily_starting_stock"]
