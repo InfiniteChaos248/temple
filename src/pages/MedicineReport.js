@@ -50,7 +50,7 @@ class MedicineReport extends Component {
             <div>
                 <h1>Medicine Report</h1>
 
-                <MedicineSelect meds={this.props.meds} cats={this.props.cats} setMid={this.selectMid} mid={this.state.mid} />
+                <MedicineSelect language={this.props.language} meds={this.props.meds} cats={this.props.cats} setMid={this.selectMid} mid={this.state.mid} />
 
                 <TextField
                     id="mid"

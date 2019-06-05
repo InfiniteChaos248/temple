@@ -2,6 +2,9 @@
 import React, { Component } from 'react';
 import Tooltip from '@material-ui/core/Tooltip';
 import axios from 'axios';
+import Switch from '@material-ui/core/Switch';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 //Styles
 import './App.css';
 //Components
@@ -52,9 +55,15 @@ class App extends Component {
       patientList: [],
       allCategories: {},
       medicineNames: {},
-      medicineCategories: {}
+      medicineCategories: {},
+      language: "E"
     }
     this.getData(0);
+  }
+
+  toggleLanguage = () => {
+    let language = this.state.language;
+    this.setState({language: language === "E" ? "T" : "E"})
   }
 
   render() {
@@ -70,6 +79,20 @@ class App extends Component {
               <div style={{ cursor: "pointer" }} onClick={() => { this.setState({ tabValue: 3 }) }}>Patient Log</div>
               <div style={{ cursor: "pointer" }} onClick={() => { this.setState({ tabValue: 4 }) }}>Update Stock</div>
               <div style={{ cursor: "pointer" }} onClick={() => { this.setState({ tabValue: 5 }) }}>Medicine Report</div>
+
+              <Typography component="div">
+                <Grid component="label" container alignItems="center" spacing={0}>
+                  <Grid item>Tamil</Grid>
+                  <Grid item>
+                    <Switch
+                      checked={this.state.language === "E"}
+                      onChange={this.toggleLanguage}
+                    />
+                  </Grid>
+                  <Grid item>English</Grid>
+                </Grid>
+              </Typography>
+
             </div>
           ) : (
               <div style={{ float: "left" }}>
@@ -79,22 +102,22 @@ class App extends Component {
         }
         <div style={{ width: this.state.showTabs ? "80%" : "100%", float: "right" }}>
           {
-            this.state.tabValue === 0 ? <NewLog meds={this.state.allMedicine} cats={this.state.allCategories} ptno={this.state.patientList.length} refreshData={this.getData} /> : ""
+            this.state.tabValue === 0 ? <NewLog language={this.state.language} meds={this.state.allMedicine} cats={this.state.allCategories} ptno={this.state.patientList.length} refreshData={this.getData} /> : ""
           }
           {
-            this.state.tabValue === 1 ? <ViewMedicine meds={this.state.allMedicine} cats={this.state.allCategories} /> : ""
+            this.state.tabValue === 1 ? <ViewMedicine language={this.state.language} meds={this.state.allMedicine} cats={this.state.allCategories} /> : ""
           }
           {
-            this.state.tabValue === 2 ? <ViewMedicineLog meds={this.state.allMedicine} medicineNames={this.state.medicineNames} medicineCategories={this.state.medicineCategories} cats={this.state.allCategories} /> : ""
+            this.state.tabValue === 2 ? <ViewMedicineLog language={this.state.language} meds={this.state.allMedicine} medicineNames={this.state.medicineNames} medicineCategories={this.state.medicineCategories} cats={this.state.allCategories} /> : ""
           }
           {
-            this.state.tabValue === 3 ? <PatientLog patients={this.state.patientList} cats={this.state.allCategories} /> : ""
+            this.state.tabValue === 3 ? <PatientLog language={this.state.language} patients={this.state.patientList} medicineNames={this.state.medicineNames} cats={this.state.allCategories} /> : ""
           }
           {
-            this.state.tabValue === 4 ? <UpdateStock meds={this.state.allMedicine} cats={this.state.allCategories} refreshData={this.getData} /> : ""
+            this.state.tabValue === 4 ? <UpdateStock language={this.state.language} meds={this.state.allMedicine} cats={this.state.allCategories} refreshData={this.getData} /> : ""
           }
           {
-            this.state.tabValue === 5 ? <MedicineReport meds={this.state.allMedicine} medicineNames={this.state.medicineNames} medicineCategories={this.state.medicineCategories} cats={this.state.allCategories} /> : ""
+            this.state.tabValue === 5 ? <MedicineReport language={this.state.language} meds={this.state.allMedicine} cats={this.state.allCategories} /> : ""
           }
         </div>
       </div>

@@ -70,8 +70,7 @@ def make_patient_log_medicine_doc(dict, pid):
     med["date"] = date_today()
     med["mid"]=int(dict["mid"])
     med["pid"]=int(pid)
-    med["qty"]=int(dict["qty"])
-    med["name"]=dict["name"]
+    med["qty"]=int(dict["qty"])    
     med["category"]=dict["category"]
     med["io"] = False
     return med

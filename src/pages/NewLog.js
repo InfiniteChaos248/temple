@@ -199,13 +199,13 @@ class NewLog extends Component {
                                 {
                                     this.state.medList.map((m, i) => {
                                         return (
-                                            <li key={i}>{m.name} - {m.qty} {this.props.cats[m.category]}</li>
+                                            <li key={i}>{m.name[this.props.language]} - {m.qty} {this.props.cats[m.category] ? this.props.cats[m.category].unit[this.props.language] : ""}</li>
                                         );
                                     })
                                 }
                             </ul>
                             {
-                                this.state.show ? (<MedicineAddView meds={this.props.meds} getAdded={this.newMeds} cats={this.props.cats} />) : ("")
+                                this.state.show ? (<MedicineAddView language={this.props.language} meds={this.props.meds} getAdded={this.newMeds} cats={this.props.cats} />) : ("")
                             }
                         </div>
                         <div>

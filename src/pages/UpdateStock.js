@@ -25,12 +25,16 @@ class UpdateStock extends Component {
       name: "",
       mid: "",
       stock: 0,
-      category: " "
+      category: " ",
+      eName: "",
+      tName: "",
+      eUnit: "",
+      tUnit: ""
     }
   }
 
   submit = () => {
-    if(this.state.stock < 0){
+    if (this.state.stock < 0) {
       alert('Stock quantity cannot be negative')
     }
     if (this.state.name === "" || this.state.mid === "" || this.state.category === " ") {
@@ -46,7 +50,11 @@ class UpdateStock extends Component {
       name: "",
       mid: "",
       stock: 0,
-      category: " "
+      category: " ",
+      eNmae: "",
+      tName: "",
+      eUnit: "",
+      tUnit: ""
     })
   }
 
@@ -60,6 +68,10 @@ class UpdateStock extends Component {
 
   handleNameChange = (event) => {
     this.setState({ name: event.target.value })
+  }
+
+  handleCatsChange = (name) => (event) => {
+    this.setState({ [name]: event.target.value })
   }
 
   handleCategoryChange = event => {
@@ -80,6 +92,24 @@ class UpdateStock extends Component {
     this.props.refreshData(4);
   }
 
+  addCategory = async () => {
+    let request = {}
+    request.eName = this.state.eName;
+    request.tName = this.state.tName;
+    request.eUnit = this.state.eUnit;
+    request.tUnit = this.state.tUnit;
+    console.log(request)
+    if (request.eName !== "" && request.tName !== "" && request.eUnit !== "" && request.tUnit !== "") {
+      let response = await axios.post('http://127.0.0.1:5000/admin/addCategory', request);
+      let responseData = response.data
+      alert(responseData.message)
+      this.props.refreshData(4);
+    } else {
+      alert('Enter all category details')
+    }
+
+  }
+
   render() {
 
     const { classes } = this.props;
@@ -88,7 +118,7 @@ class UpdateStock extends Component {
       <div>
         <h1>Update Stock</h1>
         <div style={{ textAlign: "left", paddingLeft: "50px" }}>
-          <MedicineAddView meds={this.props.meds} cats={this.props.cats} getAdded={this.updateStock} />
+          <MedicineAddView language={this.props.language} meds={this.props.meds} cats={this.props.cats} getAdded={this.updateStock} />
         </div>
         <h3>-Or-</h3>
         <h1>Add New Medicine</h1>
@@ -140,7 +170,7 @@ class UpdateStock extends Component {
                 value={this.state.category}
                 onChange={this.handleCategoryChange}
                 inputProps={{
-                  name: 'category',                  
+                  name: 'category',
                 }}
               >
                 <MenuItem value=" ">
@@ -149,7 +179,7 @@ class UpdateStock extends Component {
                 {
                   Object.keys(this.props.cats).map(c => {
                     return (
-                      <MenuItem key={c} value={c}>{c}</MenuItem>
+                      <MenuItem key={c} value={c}>{this.props.cats[c].name[this.props.language]}</MenuItem>
                     );
                   })
                 }
@@ -159,7 +189,65 @@ class UpdateStock extends Component {
               <Button onClick={this.submit}>Submit</Button>
               <Button onClick={this.reset}>Reset</Button>
             </div>
+
+            <div>
+              <TextField
+                className={classes.textField}
+                style={{ width: "40%" }}
+                id="eName"
+                label="Category (English)"
+                value={this.state.eName}
+                onChange={this.handleCatsChange('eName')}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                margin="normal"
+              />
+
+              <TextField
+                className={classes.textField}
+                style={{ width: "10%" }}
+                id="eUnit"
+                label="Unit (English)"
+                value={this.state.eUnit}
+                onChange={this.handleCatsChange('eUnit')}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                margin="normal"
+              />
+
+              <TextField
+                className={classes.textField}
+                style={{ width: "40%" }}
+                id="tName"
+                label="Category (Tamil)"
+                value={this.state.tName}
+                onChange={this.handleCatsChange('tName')}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                margin="normal"
+              />
+
+              <TextField
+                className={classes.textField}
+                style={{ width: "10%" }}
+                id="tUnit"
+                label="Unit (Tamil)"
+                value={this.state.tUnit}
+                onChange={this.handleCatsChange('tUnit')}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                margin="normal"
+              />
+
+              <Button onClick={this.addCategory}>Add Category</Button>
+            </div>
+
           </form>
+
         </div>
       </div>
     );

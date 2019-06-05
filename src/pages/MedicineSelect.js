@@ -189,7 +189,7 @@ class MedicineSelect extends Component {
         if (m.mid === mid) {
           obj = {
             value: m.mid,
-            label: m.name + " (" + m.stock + " " + this.props.cats[m.category] + ")",
+            label: m.name[this.props.language] + " (" + m.stock + " " + (this.props.cats[m.category] ? this.props.cats[m.category].unit[this.props.language]: "") + ")",
           };
         }
       })
@@ -214,7 +214,7 @@ class MedicineSelect extends Component {
 
     const suggestions = this.props.meds.map(suggestion => ({
       value: suggestion.mid,
-      label: suggestion.name + " (" + suggestion.stock + " " + this.props.cats[suggestion.category] + ")",
+      label: suggestion.name[this.props.language] + " (" + suggestion.stock + " " + (this.props.cats[suggestion.category] ? this.props.cats[suggestion.category].unit[this.props.language] : "") + ")",
     }));
 
     const selectStyles = {

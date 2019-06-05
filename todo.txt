@@ -1,19 +1,22 @@
 DEV INPROGRESS:
-code cleanup, documentation
+***language toggle
+medicine report generation -> PDF
+add new medicine -> tamil name input
+add admin access, integrate admin endpoints
+remove feature for medicine added for patient
 
 DEV ISSUES/OPTIMIZATION:
-#
+opposite language loggling happens for medicine select component (possibly due to delayed/not happening state change and re-render)
 
 DEV QUEUE:
 UI styling
-medicine report generation -> PDF
-***language toggle
+code cleanup, documentation
 client(react)-server(flask) enccryption and decryption
 production build and deployment
 make code pytonic
 
 ADDITIONAL ENHANCEMENTS:
-add category
+#
 
 DEV NOTES: 
 medicine details -> description needed ?
@@ -34,3 +37,4 @@ background server process and admin endpoint generating daily starting stock for
 patient number reload issue
 patient details -> [gender(m/f/other), address, contact no, diagnosis]
 medicine report generation
+add category

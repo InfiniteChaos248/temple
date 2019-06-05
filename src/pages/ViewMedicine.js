@@ -28,9 +28,9 @@ class ViewMedicine extends Component {
                     return (
                       <TableRow key={m.mid}>
                         <TableCell>{m.mid}</TableCell>
-                        <TableCell>{m.name}</TableCell>
-                        <TableCell>{m.category}</TableCell>
-                        <TableCell>{m.stock} {this.props.cats[m.category]}</TableCell>
+                        <TableCell>{m.name[this.props.language]}</TableCell>
+                        <TableCell>{this.props.cats[m.category] ? this.props.cats[m.category].name[this.props.language] : ""}</TableCell>
+                        <TableCell>{m.stock} {this.props.cats[m.category] ? this.props.cats[m.category].unit[this.props.language] : ""}</TableCell>
                       </TableRow>
                     );
                   })

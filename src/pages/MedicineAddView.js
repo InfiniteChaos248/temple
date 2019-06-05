@@ -60,7 +60,7 @@ class MedicineAddView extends Component {
         const { classes } = this.props;
         return (
             <div>
-                <MedicineSelect meds={this.props.meds} cats={this.props.cats} setMid={this.selectMid} mid={this.state.mid}/>
+                <MedicineSelect language={this.props.language} meds={this.props.meds} cats={this.props.cats} setMid={this.selectMid} mid={this.state.mid}/>
                 <TextField
                     className={classes.textField}
                     style={{ width: "10%" }}

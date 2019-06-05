@@ -14,7 +14,7 @@ def get_medicines():
 
 def get_categories():
     collection_category = db.getc_category()
-    document = collection_category.find_one({"sid": 1})
+    document = collection_category.find_one({"sid": 2})
     category_dict = document["categories"]
     return category_dict
 
@@ -24,6 +24,25 @@ def log_medicine(medicine_dict, io, pid):
     insert = collection_log.insert_one(medicine_doc)
     if insert.acknowledged:
         return insert.inserted_id
+
+def add_new_category(input_dict):
+    collection_category = db.getc_category()
+    document = collection_category.find_one({"sid": 2})
+    category_dict = document["categories"]
+    new_cid = str(int(max(category_dict.keys())) + 1)
+    new_category = dict()
+    new_category["name"] = dict()
+    new_category["unit"] = dict()
+    new_category["name"]["E"] = input_dict["eName"]
+    new_category["name"]["T"] = input_dict["tName"]
+    new_category["unit"]["E"] = input_dict["eUnit"]
+    new_category["unit"]["T"] = input_dict["tUnit"]
+    category_dict[new_cid] = new_category
+    update = collection_category.update_one({"sid": 2}, { "$set": { "categories": category_dict } })
+    if update.acknowledged:
+        return {"code": 1, "message": "Added new category successfully"}
+    else:
+        return {"code": -1, "message": "Error while adding new category"}
 
 def add_new_medicine(medicine_dict):
     collection_medicine = db.getc_medicine()
@@ -214,7 +233,7 @@ def insert_new_daily_starting_stock(mid, stock):
         print('Error while inserting new daily starting stock - Medicine :', file=sys.stderr)
         print(medicine, file=sys.stderr)
 
-@scheduler.scheduled_job(trigger="cron", hour=0, minute=20, id="1")
+@scheduler.scheduled_job(trigger="cron", hour=0, minute=1, id="1")
 def generate_daily_starting_stock():
     print('Job triggered to generate daily starting stock', file=sys.stdout)
     collection_medicine = db.getc_medicine()

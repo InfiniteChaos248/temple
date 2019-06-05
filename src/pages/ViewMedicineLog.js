@@ -80,7 +80,7 @@ class ViewMedicineLog extends Component {
       <div>
         <h1>Medicine Log</h1>
 
-        <MedicineSelect meds={this.props.meds} cats={this.props.cats} setMid={this.selectMid} mid={this.state.mid} />
+        <MedicineSelect language={this.props.language} meds={this.props.meds} cats={this.props.cats} setMid={this.selectMid} mid={this.state.mid} />
 
         <TextField
           id="mid"
@@ -130,8 +130,8 @@ class ViewMedicineLog extends Component {
                         <TableCell>{log.date}</TableCell>
                         <TableCell>{log.mid}</TableCell>
                         <TableCell>{log.pid === -1 ? "Doctor" : log.pid}</TableCell>
-                        <TableCell>{this.props.medicineNames[log.mid]}</TableCell>
-                        <TableCell>{log.qty} {this.props.cats[this.props.medicineCategories[log.mid]]}</TableCell>
+                        <TableCell>{this.props.medicineNames[log.mid][this.props.language]}</TableCell>
+                        <TableCell>{log.qty} {this.props.cats[this.props.medicineCategories[log.mid]] ? this.props.cats[this.props.medicineCategories[log.mid]].unit[this.props.language] : ""}</TableCell>
                         <TableCell>{log.io ? "In" : "Out"}</TableCell>
                       </TableRow>
                     );

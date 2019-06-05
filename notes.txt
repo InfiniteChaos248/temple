@@ -15,3 +15,16 @@ True => added to stock (Received)
 False => removed from stock (Issued)
 stock => (balance)
 pid = -1 => added by doctor
+
+{
+    1: {
+        "name": {
+            "E": "Oil",
+            "T": "தைலம்"
+        },
+        "unit": {
+            "E": "ml",
+            "T": "மிலி"
+        }
+    }
+}

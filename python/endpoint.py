@@ -48,6 +48,10 @@ def new_patient_log():
 def fetch_medicine_report():
 	return jsonify(da.fetch_medicine_report(request.json["mid"]))
 
+@app.route('/admin/addCategory',methods = ['POST'])
+def add_category():
+	return jsonify(da.add_new_category(request.json))
+
 @app.route('/admin/triggerJob1',methods = ['POST'])
 def trigger_job_1():
 	access_code = request.json["access_code"]

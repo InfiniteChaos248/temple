@@ -91,7 +91,7 @@ class PatientLog extends Component {
                             {
                               p.medList.map(m => {
                                 return (
-                                  <li key={m.mid}>{m.name} - {m.qty} {this.props.cats[m.category]}</li>
+                                  <li key={m.mid}>{this.props.medicineNames[m.mid][this.props.language]} - {m.qty} {this.props.cats[m.category] ? this.props.cats[m.category].unit[this.props.language] : ""}</li>
                                 )
                               })
                             }
