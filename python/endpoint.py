@@ -54,6 +54,7 @@ def add_category():
 
 @app.route('/admin/triggerJob1',methods = ['POST'])
 def trigger_job_1():
+	print('Admin endpoint triggerJob1', file=sys.stdout)
 	access_code = request.json["access_code"]
 	if access_code == "arjun":
 		if da.generate_daily_starting_stock():

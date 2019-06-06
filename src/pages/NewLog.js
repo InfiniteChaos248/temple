@@ -10,6 +10,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import MedicineAddView from './MedicineAddView';
+import {getWord} from '../language';
 
 const styles = theme => ({
     container: {
@@ -105,6 +106,12 @@ class NewLog extends Component {
         })
     }
 
+    removeMedicine = (medicine) => {
+        let medList = this.state.medList;
+        medList = medList.filter(m => {return m !== medicine});
+        this.setState({medList: medList});
+    }
+
     render() {
 
         const { classes } = this.props;
@@ -112,15 +119,14 @@ class NewLog extends Component {
         return (
             <div>
                 <span style={{ float: "right", paddingRight: "10px" }}>{moment().format('ddd, MMM DD YYYY')}</span>
-                <h1>New</h1>
+                <h1>{getWord("heading-new", this.props.language)}</h1>
                 <div style={{ paddingLeft: "50px", textAlign: "left" }}>
                     <h3>#{this.state.num}</h3>
                     <form className={classes.container} noValidate autoComplete="off">
                         <TextField
                             className={classes.textField}
                             id="patient-name"
-                            label="Patient Name"
-                            placeholder="Enter Patient Name"
+                            label={getWord("name", this.props.language)}
                             margin="normal"
                             value={this.state.name}
                             onChange={this.handleNameChange}
@@ -132,7 +138,7 @@ class NewLog extends Component {
                             className={classes.textField}
                             style={{ width: "10%" }}
                             id="patient-age"
-                            label="Age"
+                            label={getWord("age", this.props.language)}
                             value={this.state.age}
                             onChange={this.handleAgeChange}
                             type="number"
@@ -143,24 +149,24 @@ class NewLog extends Component {
                         />
 
                         <FormControl component="fieldset">
-                            <FormLabel component="legend">Gender</FormLabel>
+                            <FormLabel component="legend">{getWord("gender", this.props.language)}</FormLabel>
                             <RadioGroup aria-label="gender" name="gender" value={this.state.gender} onChange={this.handleRadioChange} row>
                                 <FormControlLabel
                                     value="M"
                                     control={<Radio color="primary" />}
-                                    label="Male"
+                                    label={getWord("male", this.props.language)}
                                     labelPlacement="end"
                                 />
                                 <FormControlLabel
                                     value="F"
                                     control={<Radio color="primary" />}
-                                    label="Female"
+                                    label={getWord("female", this.props.language)}
                                     labelPlacement="end"
                                 />
                                 <FormControlLabel
                                     value="O"
                                     control={<Radio color="primary" />}
-                                    label="Other"
+                                    label={getWord("other", this.props.language)}
                                     labelPlacement="end"
                                 />
                             </RadioGroup>
@@ -168,7 +174,7 @@ class NewLog extends Component {
 
                         <TextField
                             id="address"
-                            label="Address"
+                            label={getWord("address", this.props.language)}
                             multiline
                             rowsMax="4"
                             value={this.state.address}
@@ -178,7 +184,7 @@ class NewLog extends Component {
 
                         <TextField
                             id="contact"
-                            label="Contact#"
+                            label={getWord("contact", this.props.language)}
                             value={this.state.contact}
                             onChange={this.handleChange('contact')}
                             margin="normal"
@@ -186,7 +192,7 @@ class NewLog extends Component {
 
                         <TextField
                             id="diagnosis"
-                            label="Diagnosis"
+                            label={getWord("diagnosis", this.props.language)}
                             multiline
                             rowsMax="4"
                             value={this.state.diagnosis}
@@ -199,7 +205,7 @@ class NewLog extends Component {
                                 {
                                     this.state.medList.map((m, i) => {
                                         return (
-                                            <li key={i}>{m.name[this.props.language]} - {m.qty} {this.props.cats[m.category] ? this.props.cats[m.category].unit[this.props.language] : ""}</li>
+                                            <li key={i}>{m.name[this.props.language]} - {m.qty} {this.props.cats[m.category] ? this.props.cats[m.category].unit[this.props.language] : ""}      <span onClick={() => this.removeMedicine(m)}>X</span></li>
                                         );
                                     })
                                 }
@@ -209,11 +215,11 @@ class NewLog extends Component {
                             }
                         </div>
                         <div>
-                            <Button onClick={this.toggleAdd}>{this.state.show ? "Cancel" : "Add Medicine"}</Button>
+                            <Button onClick={this.toggleAdd}>{this.state.show ? getWord("cancel-button", this.props.language) : getWord("add-medicine-button", this.props.language)}</Button>
                         </div>
                         <div>
-                            <Button onClick={this.submit}>Submit</Button>
-                            <Button onClick={this.reset}>Reset</Button>
+                            <Button onClick={this.submit}>{getWord("submit-button", this.props.language)}</Button>
+                            <Button onClick={this.reset}>{getWord("reset-button", this.props.language)}</Button>
                         </div>
                     </form>
                 </div>

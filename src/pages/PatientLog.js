@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import moment from 'moment';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
+import {getWord} from '../language';
 
 class PatientLog extends Component {
 
@@ -40,11 +41,11 @@ class PatientLog extends Component {
   render() {
     return (
       <div>
-        <h1>Patient Log</h1>
+        <h1>{getWord("heading-patient-log", this.props.language)}</h1>
 
         <TextField
           id="date"
-          label="Date"
+          label={getWord("date", this.props.language)}
           type="date"
           value={this.state.date}
           onChange={this.handleDateChange}
@@ -53,24 +54,24 @@ class PatientLog extends Component {
           }}
         />
 
-        <Button onClick={this.searchPatient}>Search</Button>
+        <Button onClick={this.searchPatient}>{getWord("search-button", this.props.language)}</Button>
 
-        <Button onClick={() => { this.setState({ patientList: this.props.patients, date: moment().format('YYYY-MM-DD') }) }}>Today</Button>
+        <Button onClick={() => { this.setState({ patientList: this.props.patients, date: moment().format('YYYY-MM-DD') }) }}>{getWord("today-button", this.props.language)}</Button>
 
         {
           this.state.patientList.length > 0 ? (
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>Date</TableCell>
-                  <TableCell>Patient#</TableCell>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Age</TableCell>
-                  <TableCell>Gender</TableCell>
-                  <TableCell>Address</TableCell>
-                  <TableCell>Contact#</TableCell>
-                  <TableCell>Diagnosis</TableCell>
-                  <TableCell>Medicine Given</TableCell>
+                  <TableCell>{getWord("date", this.props.language)}</TableCell>
+                  <TableCell>{getWord("patient-number", this.props.language)}</TableCell>
+                  <TableCell>{getWord("name", this.props.language)}</TableCell>
+                  <TableCell>{getWord("age", this.props.language)}</TableCell>
+                  <TableCell>{getWord("gender", this.props.language)}</TableCell>
+                  <TableCell>{getWord("address", this.props.language)}</TableCell>
+                  <TableCell>{getWord("contact", this.props.language)}</TableCell>
+                  <TableCell>{getWord("diagnosis", this.props.language)}</TableCell>
+                  <TableCell>{getWord("medicine-given", this.props.language)}</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -82,7 +83,7 @@ class PatientLog extends Component {
                         <TableCell>{p.id}</TableCell>
                         <TableCell>{p.name}</TableCell>
                         <TableCell>{p.age}</TableCell>
-                        <TableCell>{p.gender !== null ? (p.gender === "M" ? "Male" : p.gender === "F" ? "Female" : "Other") : ""}</TableCell>
+                        <TableCell>{p.gender !== null ? (p.gender === "M" ? getWord("male", this.props.language) : p.gender === "F" ? getWord("female", this.props.language) : getWord("other", this.props.language)) : ""}</TableCell>
                         <TableCell>{p.address !== null ? p.address : ""}</TableCell>
                         <TableCell>{p.contact !== null ? p.contact : ""}</TableCell>
                         <TableCell>{p.diagnosis !== null ? p.diagnosis : ""}</TableCell>
@@ -103,7 +104,7 @@ class PatientLog extends Component {
                 }
               </TableBody>
             </Table>
-          ) : (<h6>No patients seen today</h6>)
+          ) : (<h6>{getWord("message-no-patients", this.props.language)}</h6>)
         }
       </div>
     );

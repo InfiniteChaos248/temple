@@ -4,6 +4,7 @@ import axios from 'axios';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 import { Button, Select, MenuItem } from '@material-ui/core';
+import {getWord} from '../language';
 
 const styles = theme => ({
   container: {
@@ -37,7 +38,7 @@ class UpdateStock extends Component {
     if (this.state.stock < 0) {
       alert('Stock quantity cannot be negative')
     }
-    if (this.state.name === "" || this.state.mid === "" || this.state.category === " ") {
+    if (this.state.name === "" || this.state.tamilName === "" || this.state.mid === "" || this.state.category === " ") {
       alert('Please enter all the required medicine details')
     } else {
       this.addNewMedicine(this.state);
@@ -48,6 +49,7 @@ class UpdateStock extends Component {
   reset = () => {
     this.setState({
       name: "",
+      tamilName: "",
       mid: "",
       stock: 0,
       category: " ",
@@ -68,6 +70,10 @@ class UpdateStock extends Component {
 
   handleNameChange = (event) => {
     this.setState({ name: event.target.value })
+  }
+
+  handleTamilNameChange = (event) => {
+    this.setState({ tamilName: event.target.value })
   }
 
   handleCatsChange = (name) => (event) => {
@@ -110,28 +116,44 @@ class UpdateStock extends Component {
 
   }
 
+  adminJob1 = async () => {
+    let request = {}
+    request["access_code"] = "arjun";
+    let response = await axios.post('http://127.0.0.1:5000/admin/triggerJob1', request);
+    alert(response.data)
+  }
+
   render() {
 
     const { classes } = this.props;
 
     return (
       <div>
-        <h1>Update Stock</h1>
+        <h1>{getWord("heading-update-stock", this.props.language)}</h1>
         <div style={{ textAlign: "left", paddingLeft: "50px" }}>
           <MedicineAddView language={this.props.language} meds={this.props.meds} cats={this.props.cats} getAdded={this.updateStock} />
         </div>
-        <h3>-Or-</h3>
-        <h1>Add New Medicine</h1>
+        <h1>{getWord("heading-add-new-medicine", this.props.language)}</h1>
         <div>
           <form className={classes.container} noValidate autoComplete="off">
             <TextField
               className={classes.textField}
               id="medicine-name"
-              label="Medicine Name"
-              placeholder="Enter New Medicine Name"
+              label={getWord("medicine-english-name", this.props.language)}
               margin="normal"
               value={this.state.name}
               onChange={this.handleNameChange}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
+              className={classes.textField}
+              id="medicine-tName"
+              label={getWord("medicine-tamil-name", this.props.language)}
+              margin="normal"
+              value={this.state.tamilName}
+              onChange={this.handleTamilNameChange}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -141,7 +163,7 @@ class UpdateStock extends Component {
                 className={classes.textField}
                 style={{ width: "10%" }}
                 id="medicine-id"
-                label="MID"
+                label={getWord("medicine-id", this.props.language)}
                 value={this.state.mid}
                 onChange={this.handleMidChange}
                 type="number"
@@ -154,7 +176,7 @@ class UpdateStock extends Component {
                 className={classes.textField}
                 style={{ width: "10%" }}
                 id="medicine-qty"
-                label="Quantity"
+                label={getWord("medicine-quantity", this.props.language)}
                 value={this.state.stock}
                 onChange={this.handleStockChange}
                 type="number"
@@ -174,7 +196,7 @@ class UpdateStock extends Component {
                 }}
               >
                 <MenuItem value=" ">
-                  <em>-- Select A Category--</em>
+                  <em>{getWord("select-category", this.props.language)}</em>
                 </MenuItem>
                 {
                   Object.keys(this.props.cats).map(c => {
@@ -186,8 +208,8 @@ class UpdateStock extends Component {
               </Select>
             </div>
             <div>
-              <Button onClick={this.submit}>Submit</Button>
-              <Button onClick={this.reset}>Reset</Button>
+              <Button onClick={this.submit}>{getWord("submit-button", this.props.language)}</Button>
+              <Button onClick={this.reset}>{getWord("reset-button", this.props.language)}</Button>
             </div>
 
             <div>
@@ -245,6 +267,8 @@ class UpdateStock extends Component {
 
               <Button onClick={this.addCategory}>Add Category</Button>
             </div>
+
+            <Button onClick={this.adminJob1}>Update Starting Stock</Button>
 
           </form>
 

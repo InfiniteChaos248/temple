@@ -9,6 +9,7 @@ import moment from 'moment';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import MedicineSelect from './MedicineSelect';
+import {getWord} from '../language';
 
 class ViewMedicineLog extends Component {
 
@@ -78,13 +79,13 @@ class ViewMedicineLog extends Component {
   render() {
     return (
       <div>
-        <h1>Medicine Log</h1>
+        <h1>{getWord("heading-medicine-log", this.props.language)}</h1>
 
         <MedicineSelect language={this.props.language} meds={this.props.meds} cats={this.props.cats} setMid={this.selectMid} mid={this.state.mid} />
 
         <TextField
           id="mid"
-          label="Medicine ID"
+          label={getWord("medicine-id", this.props.language)}
           type="number"
           style={{ width: "10%" }}
           value={this.state.mid}
@@ -96,7 +97,7 @@ class ViewMedicineLog extends Component {
 
         <TextField
           id="date"
-          label="Date"
+          label={getWord("date", this.props.language)}
           type="date"
           value={this.state.date}
           onChange={this.handleDateChange}
@@ -105,21 +106,21 @@ class ViewMedicineLog extends Component {
           }}
         />
 
-        <Button onClick={this.getLog}>Search</Button>
+        <Button onClick={this.getLog}>{getWord("search-button", this.props.language)}</Button>
 
-        <Button onClick={this.getTodayLog}>Today</Button>
+        <Button onClick={this.getTodayLog}>{getWord("today-button", this.props.language)}</Button>
 
         {
           this.state.logList.length > 0 ? (
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>Date</TableCell>
-                  <TableCell>Medicine Id</TableCell>
-                  <TableCell>Patient#</TableCell>
-                  <TableCell>Medicine Name</TableCell>
-                  <TableCell>Quantity</TableCell>
-                  <TableCell>in/out</TableCell>
+                  <TableCell>{getWord("date", this.props.language)}</TableCell>
+                  <TableCell>{getWord("medicine-id", this.props.language)}</TableCell>
+                  <TableCell>{getWord("patient-number", this.props.language)}</TableCell>
+                  <TableCell>{getWord("medicine-name", this.props.language)}</TableCell>
+                  <TableCell>{getWord("medicine-quantity", this.props.language)}</TableCell>
+                  <TableCell>{getWord("in-out", this.props.language)}</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -129,17 +130,17 @@ class ViewMedicineLog extends Component {
                       <TableRow key={i}>
                         <TableCell>{log.date}</TableCell>
                         <TableCell>{log.mid}</TableCell>
-                        <TableCell>{log.pid === -1 ? "Doctor" : log.pid}</TableCell>
+                        <TableCell>{log.pid === -1 ? getWord("doctor", this.props.language) : log.pid}</TableCell>
                         <TableCell>{this.props.medicineNames[log.mid][this.props.language]}</TableCell>
                         <TableCell>{log.qty} {this.props.cats[this.props.medicineCategories[log.mid]] ? this.props.cats[this.props.medicineCategories[log.mid]].unit[this.props.language] : ""}</TableCell>
-                        <TableCell>{log.io ? "In" : "Out"}</TableCell>
+                        <TableCell>{log.io ? getWord("received", this.props.language) : getWord("issued", this.props.language)}</TableCell>
                       </TableRow>
                     );
                   })
                 }
               </TableBody>
             </Table>
-          ) : (<h6>No medicines given/updated today</h6>)
+          ) : (<h6>{getWord("message-no-log", this.props.language)}</h6>)
         }
       </div>
     );

@@ -51,9 +51,11 @@ def make_medicine_log_dict(doc):
 def make_medicine_doc(dict):
     med = {}
     med["mid"] = int(dict["mid"])
-    med["name"] = dict["name"]
+    med["name"] = {}
+    med["name"]["E"] = dict["name"]
+    med["name"]["T"] = dict["tamilName"]
     med["stock"] = int(dict["stock"])
-    med["category"] = dict["category"]
+    med["category"] = int(dict["category"])
     return med
 
 def make_medicine_log_doc(dict, io, pid):

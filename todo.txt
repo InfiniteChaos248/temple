@@ -1,9 +1,6 @@
 DEV INPROGRESS:
-***language toggle
+complete all words, alert phrases, etc
 medicine report generation -> PDF
-add new medicine -> tamil name input
-add admin access, integrate admin endpoints
-remove feature for medicine added for patient
 
 DEV ISSUES/OPTIMIZATION:
 opposite language loggling happens for medicine select component (possibly due to delayed/not happening state change and re-render)
@@ -11,6 +8,8 @@ opposite language loggling happens for medicine select component (possibly due t
 DEV QUEUE:
 UI styling
 code cleanup, documentation
+add admin access level, normal access level, token auth?
+add words to statics collection
 client(react)-server(flask) enccryption and decryption
 production build and deployment
 make code pytonic
@@ -38,3 +37,7 @@ patient number reload issue
 patient details -> [gender(m/f/other), address, contact no, diagnosis]
 medicine report generation
 add category
+integrate admin endpoint 1
+add new medicine -> tamil name input
+remove feature for medicine added for patient
+***language toggle

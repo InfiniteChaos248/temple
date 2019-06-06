@@ -14,6 +14,7 @@ import NewLog from './pages/NewLog';
 import PatientLog from './pages/PatientLog';
 import UpdateStock from './pages/UpdateStock';
 import MedicineReport from './pages/MedicineReport';
+import {getWord} from './language';
 
 class App extends Component {
 
@@ -73,16 +74,16 @@ class App extends Component {
           this.state.showTabs ? (
             <div style={{ width: "20%", float: "left" }}>
               <Tooltip title="Hide"><span style={{ float: "right", cursor: "pointer" }} onClick={() => { this.setState({ showTabs: false }) }}>&lt;</span></Tooltip>
-              <div style={{ cursor: "pointer" }} onClick={() => { this.setState({ tabValue: 0 }) }}>New</div>
-              <div style={{ cursor: "pointer" }} onClick={() => { this.setState({ tabValue: 1 }) }}>Medicine</div>
-              <div style={{ cursor: "pointer" }} onClick={() => { this.setState({ tabValue: 2 }) }}>Medicine Log</div>
-              <div style={{ cursor: "pointer" }} onClick={() => { this.setState({ tabValue: 3 }) }}>Patient Log</div>
-              <div style={{ cursor: "pointer" }} onClick={() => { this.setState({ tabValue: 4 }) }}>Update Stock</div>
-              <div style={{ cursor: "pointer" }} onClick={() => { this.setState({ tabValue: 5 }) }}>Medicine Report</div>
+              <div style={{ cursor: "pointer" }} onClick={() => { this.setState({ tabValue: 0 }) }}>{getWord("heading-new", this.state.language)}</div>
+              <div style={{ cursor: "pointer" }} onClick={() => { this.setState({ tabValue: 1 }) }}>{getWord("heading-medicine", this.state.language)}</div>
+              <div style={{ cursor: "pointer" }} onClick={() => { this.setState({ tabValue: 2 }) }}>{getWord("heading-medicine-log", this.state.language)}</div>
+              <div style={{ cursor: "pointer" }} onClick={() => { this.setState({ tabValue: 3 }) }}>{getWord("heading-patient-log", this.state.language)}</div>
+              <div style={{ cursor: "pointer" }} onClick={() => { this.setState({ tabValue: 4 }) }}>{getWord("heading-update-stock", this.state.language)}</div>
+              <div style={{ cursor: "pointer" }} onClick={() => { this.setState({ tabValue: 5 }) }}>{getWord("heading-medicine-report", this.state.language)}</div>
 
               <Typography component="div">
                 <Grid component="label" container alignItems="center" spacing={0}>
-                  <Grid item>Tamil</Grid>
+                  <Grid item>தமிழ்</Grid>
                   <Grid item>
                     <Switch
                       checked={this.state.language === "E"}

@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 import MedicineSelect from './MedicineSelect';
 import { Button } from '@material-ui/core';
+import {getWord} from '../language';
 
 const styles = theme => ({
     container: {
@@ -67,7 +68,7 @@ class MedicineAddView extends Component {
                     value={this.state.mid}
                     onChange={this.handleMidChange}
                     id="med-id"
-                    label="ID"
+                    label={getWord("medicine-id", this.props.language)}
                     type="number"
                     InputLabelProps={{
                         shrink: true,
@@ -80,7 +81,7 @@ class MedicineAddView extends Component {
                     value={this.state.qty}
                     onChange={this.handleQtyChange}
                     id="med-qty"
-                    label="Quantity"
+                    label={getWord("medicine-quantity", this.props.language)}
                     type="number"
                     InputLabelProps={{
                         shrink: true,
@@ -89,7 +90,7 @@ class MedicineAddView extends Component {
                 />
                 <Button
                 onClick={this.okClicked}
-                >OK</Button>
+                >{getWord("ok-button", this.props.language)}</Button>
             </div>
         );
     }

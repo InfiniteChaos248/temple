@@ -4,22 +4,23 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import {getWord} from '../language';
 
 class ViewMedicine extends Component {
 
   render() {
     return (
       <div>
-        <h1>Medicine</h1>
+        <h1>{getWord("heading-medicine", this.props.language)}</h1>
         {
           this.props.meds.length > 0 ? (
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>Id</TableCell>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Category</TableCell>
-                  <TableCell>Quantity</TableCell>
+                  <TableCell>{getWord("medicine-id", this.props.language)}</TableCell>
+                  <TableCell>{getWord("medicine-name", this.props.language)}</TableCell>
+                  <TableCell>{getWord("medicine-category", this.props.language)}</TableCell>
+                  <TableCell>{getWord("medicine-quantity", this.props.language)}</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
