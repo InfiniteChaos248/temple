@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import MedicineSelect from './MedicineSelect';
+import {getWord} from '../language';
 
 class MedicineReport extends Component {
 
@@ -32,7 +33,7 @@ class MedicineReport extends Component {
         let request = {};
         request.mid = Number(this.state.mid);
         if(this.state.mid === ""){
-            alert("Please select medicine to view report")
+            alert(getWord('alert-medicine-report', this.props.language))
             return;
         }
         if(this.state.generated){
@@ -48,13 +49,13 @@ class MedicineReport extends Component {
     render() {
         return (
             <div>
-                <h1>Medicine Report</h1>
+                <h1>{getWord("heading-medicine-report", this.props.language)}</h1>
 
                 <MedicineSelect language={this.props.language} meds={this.props.meds} cats={this.props.cats} setMid={this.selectMid} mid={this.state.mid} />
 
                 <TextField
                     id="mid"
-                    label="Medicine ID"
+                    label={getWord("medicine-id", this.props.language)}
                     type="number"
                     style={{ width: "10%" }}
                     value={this.state.mid}
@@ -64,18 +65,18 @@ class MedicineReport extends Component {
                     }}
                 />
 
-                <Button onClick={this.generateReport}>Get Report</Button>
+                <Button onClick={this.generateReport}>{getWord("get-report", this.props.language)}</Button>
 
                 {
                     this.state.reportList.length > 0 ? (
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>Date</TableCell>
-                                    <TableCell>Opening Stock</TableCell>
-                                    <TableCell>Issued</TableCell>
-                                    <TableCell>Received</TableCell>
-                                    <TableCell>Balance</TableCell>
+                                    <TableCell>{getWord("date", this.props.language)}</TableCell>
+                                    <TableCell>{getWord("opening-stock", this.props.language)}</TableCell>
+                                    <TableCell>{getWord("total-received", this.props.language)}</TableCell>
+                                    <TableCell>{getWord("total-issued", this.props.language)}</TableCell>
+                                    <TableCell>{getWord("balance", this.props.language)}</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -85,8 +86,8 @@ class MedicineReport extends Component {
                                             <TableRow key={i}>
                                                 <TableCell>{r.date}</TableCell>
                                                 <TableCell>{r.opening}</TableCell>
-                                                <TableCell>{r.issued}</TableCell>
                                                 <TableCell>{r.received}</TableCell>
+                                                <TableCell>{r.issued}</TableCell>
                                                 <TableCell>{r.balance}</TableCell>
                                             </TableRow>
                                         )
@@ -95,7 +96,7 @@ class MedicineReport extends Component {
                                 }
                             </TableBody>
                         </Table>
-                    ) : (<h6>No reports to show</h6>)
+                    ) : (<h6>{getWord("message-no-report", this.props.language)}</h6>)
                 }
 
             </div>

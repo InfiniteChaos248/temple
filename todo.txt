@@ -1,5 +1,5 @@
 DEV INPROGRESS:
-complete all words, alert phrases, etc
+words for service response messages
 medicine report generation -> PDF
 
 DEV ISSUES/OPTIMIZATION:
@@ -41,3 +41,4 @@ integrate admin endpoint 1
 add new medicine -> tamil name input
 remove feature for medicine added for patient
 ***language toggle
+complete all words, alert phrases, etc

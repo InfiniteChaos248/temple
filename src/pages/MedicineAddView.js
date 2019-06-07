@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 import MedicineSelect from './MedicineSelect';
 import { Button } from '@material-ui/core';
-import {getWord} from '../language';
+import { getWord } from '../language';
 
 const styles = theme => ({
     container: {
@@ -19,7 +19,7 @@ const styles = theme => ({
 
 class MedicineAddView extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             mid: "",
@@ -35,20 +35,23 @@ class MedicineAddView extends Component {
     }
 
     handleMidChange = (event) => {
-        this.setState({mid: event.target.value})
+        this.setState({ mid: event.target.value })
     }
 
     handleQtyChange = (event) => {
-        this.setState({qty: event.target.value})
+        this.setState({ qty: event.target.value })
     }
 
     selectMid = (mid) => {
-        this.setState({mid: mid})
+        this.setState({ mid: mid })
     }
 
     okClicked = () => {
-        if(this.state.mid === "" || this.state.qty === ""){
-            alert('Please enter the medicine and quantity')
+        if (this.state.qty < 0) {
+            alert(getWord('alert-negative-quantity', this.props.language))
+        }
+        else if (this.state.mid === "" || this.state.qty === "") {
+            alert(getWord('alert-medicine-details', this.props.language))
         } else {
             let retObj = {}
             retObj.mid = Number(this.state.mid)
@@ -61,7 +64,7 @@ class MedicineAddView extends Component {
         const { classes } = this.props;
         return (
             <div>
-                <MedicineSelect language={this.props.language} meds={this.props.meds} cats={this.props.cats} setMid={this.selectMid} mid={this.state.mid}/>
+                <MedicineSelect language={this.props.language} meds={this.props.meds} cats={this.props.cats} setMid={this.selectMid} mid={this.state.mid} />
                 <TextField
                     className={classes.textField}
                     style={{ width: "10%" }}
@@ -89,7 +92,7 @@ class MedicineAddView extends Component {
                     margin="normal"
                 />
                 <Button
-                onClick={this.okClicked}
+                    onClick={this.okClicked}
                 >{getWord("ok-button", this.props.language)}</Button>
             </div>
         );

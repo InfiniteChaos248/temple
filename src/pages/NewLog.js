@@ -32,6 +32,7 @@ class NewLog extends Component {
             num: this.props.ptno + 1,
             name: "",
             age: "",
+            gender: "",
             address: "",
             contact: "",
             diagnosis: "",
@@ -42,9 +43,9 @@ class NewLog extends Component {
 
     submit = async () => {
         if (this.state.name === "" || this.state.age === "" || this.state.medList.length === 0 || this.state.address === "" || this.state.diagnosis === "" || this.state.contact === "") {
-            alert('Please enter patient details and add medicine')
+            alert(getWord('alert-patient-details', this.props.language))
         } else if (!(this.state.contact.length === 10 || this.state.contact.length === 8)) {
-            alert('Invalid contact number')
+            alert(getWord('alert-invalid-contact', this.props.language))
         }
         else {
             let response = await axios.post('http://127.0.0.1:5000/newPatientLog', this.state)
@@ -62,7 +63,10 @@ class NewLog extends Component {
             age: "",
             show: false,
             medList: [],
-            gender: ""
+            gender: "",
+            address: "",
+            contact: "",
+            diagnosis: ""
         })
     }
 

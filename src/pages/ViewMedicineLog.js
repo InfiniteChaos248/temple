@@ -38,7 +38,7 @@ class ViewMedicineLog extends Component {
 
   getLog = async () => {
     if (this.state.mid === "") {
-      alert("Please select a medicine to view it's log")
+      alert(getWord("alert-view-log", this.props.language))
     } else if (this.state.date === moment().format('YYYY-MM-DD')) {
       this.getTodayLog();
     } else if (this.state.searchClicked) {
@@ -59,7 +59,7 @@ class ViewMedicineLog extends Component {
 
   getTodayLog = async () => {
     if (this.state.mid === "") {
-      alert("Please select a medicine to view it's log")
+      alert(getWord("alert-view-log", this.props.language))
     } else if (this.state.todayClicked) {
       //today click optimization => if today is clicked again without changing medicine or date do nothing
       console.log("optimized today clicking")

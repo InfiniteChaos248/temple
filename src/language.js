@@ -158,7 +158,88 @@ const map = {
     "select-category": {
         "E": "Select Category",
         "T": "வகையை தேர்வு செய்க"
+    },
+    "heading-new-category": {
+        "E": "New Category",
+        "T": "புதிய வகை"
+    },
+    "category-e": {
+        "E": "Category",
+        "T": "வகை (ஆங்கிலம்)"
+    },
+    "unit-e": {
+        "E": "Unit",
+        "T": "அலகு (ஆங்கிலம்)"
+    },
+    "category-t": {
+        "E": "Category (Tamil)",
+        "T": "வகை"
+    },
+    "unit-t": {
+        "E": "Unit (Tamil)",
+        "T": "அலகு"
+    },
+    "add-category-button": {
+        "E": "Add category",
+        "T": "வகை சேர்க்க"
+    },
+    "generate-starting-stock-button": {
+        "E": "Generate Starting Stock",
+        "T": "சேகரிப்பு தொடங்குவதற்கு"
+    },
+    "get-report": {
+        "E": "Get Report",
+        "T": "அறிக்கை உருவாக்கு"
+    },
+    "message-no-report": {
+        "E": "No Reports to show",
+        "T": "காட்ட எந்த அறிக்கையும் இல்லை"
+    },
+    "opening-stock": {
+        "E": "Opening Stock",
+        "T": "திறப்பு சேகரிப்பு"
+    },
+    "total-issued": {
+        "E": "Total Issued",
+        "T": "மொத்த செலவு"
+    },
+    "total-received": {
+        "E": "Total Received",
+        "T": "மொத்த வரவு"
+    },
+    "balance": {
+        "E": "Balance",
+        "T": "மீதி"
+    },
+    "alert-patient-details": {
+        "E": "Please enter patient details and add medicine",
+        "T": "தயவுசெய்து நோயாளி விவரங்களை உள்ளிட்டு, மருந்து சேர்க்கவும்"
+    },
+    "alert-invalid-contact": {
+        "E": "Invalid Contact Details",
+        "T": "தவறான தொடர்பு விவரங்கள்"
+    },
+    "alert-view-log": {
+        "E": "PLease select a medicine to view it's log",
+        "T": "பதிவைப் பார்ப்பதற்கு மருந்தை தேர்ந்தெடுக்கவும்"
+    },
+    "alert-negative-quantity": {
+        "E": "Quantity cannot be negative",
+        "T": "அளவு எதிர்மறை எண்களாக இருக்க முடியாது"
+    },
+    "alert-medicine-details": {
+        "E": "Please enter all the required medicine details",
+        "T": "தேவையான அனைத்து மருந்து விவரங்களையும் உள்ளிடவும்"
+    },
+    "alert-category-details": {
+        "E": "Please enter all the required category details",
+        "T": "தேவையான அனைத்து வகை விவரங்களையும் உள்ளிடவும்"
+    },
+    "alert-medicine-report": {
+        "E": "Please select medicine to view report",
+        "T": "அறிக்கை பார்க்க மருந்து ஒன்றைத் தேர்ந்தெடுக்கவும்"
     }
+
 }
 
 export function getWord(key, language) {

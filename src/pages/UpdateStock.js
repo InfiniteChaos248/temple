@@ -4,7 +4,7 @@ import axios from 'axios';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 import { Button, Select, MenuItem } from '@material-ui/core';
-import {getWord} from '../language';
+import { getWord } from '../language';
 
 const styles = theme => ({
   container: {
@@ -36,10 +36,10 @@ class UpdateStock extends Component {
 
   submit = () => {
     if (this.state.stock < 0) {
-      alert('Stock quantity cannot be negative')
+      alert(getWord('alert-negative-quantity', this.props.language))
     }
-    if (this.state.name === "" || this.state.tamilName === "" || this.state.mid === "" || this.state.category === " ") {
-      alert('Please enter all the required medicine details')
+    else if (this.state.name === "" || this.state.tamilName === "" || this.state.mid === "" || this.state.category === " ") {
+      alert(getWord('alert-medicine-details', this.props.language))
     } else {
       this.addNewMedicine(this.state);
       this.reset();
@@ -111,7 +111,7 @@ class UpdateStock extends Component {
       alert(responseData.message)
       this.props.refreshData(4);
     } else {
-      alert('Enter all category details')
+      alert(getWord('alert-category-details', this.props.language))
     }
 
   }
@@ -211,13 +211,13 @@ class UpdateStock extends Component {
               <Button onClick={this.submit}>{getWord("submit-button", this.props.language)}</Button>
               <Button onClick={this.reset}>{getWord("reset-button", this.props.language)}</Button>
             </div>
-
+            <h1>{getWord("heading-new-category", this.props.language)}</h1>
             <div>
               <TextField
                 className={classes.textField}
                 style={{ width: "40%" }}
                 id="eName"
-                label="Category (English)"
+                label={getWord("category-e", this.props.language)}
                 value={this.state.eName}
                 onChange={this.handleCatsChange('eName')}
                 InputLabelProps={{
@@ -230,7 +230,7 @@ class UpdateStock extends Component {
                 className={classes.textField}
                 style={{ width: "10%" }}
                 id="eUnit"
-                label="Unit (English)"
+                label={getWord("unit-e", this.props.language)}
                 value={this.state.eUnit}
                 onChange={this.handleCatsChange('eUnit')}
                 InputLabelProps={{
@@ -243,7 +243,7 @@ class UpdateStock extends Component {
                 className={classes.textField}
                 style={{ width: "40%" }}
                 id="tName"
-                label="Category (Tamil)"
+                label={getWord("category-t", this.props.language)}
                 value={this.state.tName}
                 onChange={this.handleCatsChange('tName')}
                 InputLabelProps={{
@@ -256,7 +256,7 @@ class UpdateStock extends Component {
                 className={classes.textField}
                 style={{ width: "10%" }}
                 id="tUnit"
-                label="Unit (Tamil)"
+                label={getWord("unit-t", this.props.language)}
                 value={this.state.tUnit}
                 onChange={this.handleCatsChange('tUnit')}
                 InputLabelProps={{
@@ -265,10 +265,10 @@ class UpdateStock extends Component {
                 margin="normal"
               />
 
-              <Button onClick={this.addCategory}>Add Category</Button>
+              <Button onClick={this.addCategory}>{getWord("add-category-button", this.props.language)}</Button>
             </div>
 
-            <Button onClick={this.adminJob1}>Update Starting Stock</Button>
+            <Button onClick={this.adminJob1}>{getWord("generate-starting-stock-button", this.props.language)}</Button>
 
           </form>
 
